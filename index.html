@@ -68,7 +68,49 @@ h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold)
     padding: 12px; border-radius: 15px; border: 1px solid #333; 
     font-size: 13px; color: #ddd; transition: 0.3s;
 }
+/* Opening Transition Styles */
+#opening-curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #121212;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1.2s cubic-bezier(0.7, 0, 0.3, 1), opacity 1s;
+}
 
+.curtain-content {
+    text-align: center;
+    animation: pulse 2s infinite;
+}
+
+.floating-heart {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.tap-text {
+    color: var(--gold);
+    font-family: 'Dancing Script', cursive;
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+/* The Animation that makes it slide up and fade */
+.curtain-off {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.1); opacity: 1; }
+}
 .next-btn {
     padding: 10px 30px; background: var(--gold); color: black;
     border: none; border-radius: 50px; font-weight: 600; cursor: pointer;
@@ -96,7 +138,13 @@ h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold)
 }
 </style>
 </head>
-
+<div id="opening-curtain" onclick="startExperience()">
+    <div class="curtain-content">
+        <div class="floating-heart">💖</div>
+        <h2 class="tap-text">Click kar isy</h2>
+        <div class="sparkles">✨✨✨</div>
+    </div>
+</div>
 <body onclick="autoStartMusic()">
 
 <div id="progress"></div>
@@ -111,7 +159,7 @@ h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold)
         <div class="glass-card">
             <h1>Happy Birthday meeri jaaaan 🎂</h1>
             <p class="handwritten">Aaj ka din sirf tere naam...</p>
-            <p style="margin-top: 20px;">Ye bas tery liy special bnai ha main koi gift to ni dy sakta you know why so is per guzara kar i hope you will like it.Yaha use kar rha tha sab kuch color, song  jo main ny tum sy poocha tha.Ya bna rha tha tab 🥰</p>
+            <p style="margin-top: 20px;">Ye bas tery liy special bnai ha main koi gift to ni dy sakta you know why so is per guzara kar i hope you will like it.Ya ha use kar rha tha sab kuch color, song  jo main ny tum sy poocha tha.Ya bna rha tha tab 🥰</p>
             <button class="next-btn" onclick="go(2)">Chal phir Enjoy kar ➔</button>
         </div>
     </div>
@@ -121,11 +169,11 @@ h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold)
             <h1>Tum mujy ku achi lagti ho ✨</h1>
             <div class="tareef-grid">
                 <div class="tareef-card">Kuu ky tum ho he khass 😄</div>
-                <div class="tareef-card">Tumhara batain karna kia he khoob ho 💛</div>
+                <div class="tareef-card">Tumhara batain karna kia he khoob ha 💛</div>
                 <div class="tareef-card">Tum burii ni ho bus tum khud ko samajti ho 🤗</div>
                 <div class="tareef-card">Tumhare Jaisa shayad Koi Nahi ha 💎</div>
             </div>
-            <button class="next-btn" onclick="go(3)">Aur b suno g ya bas? 😉</button>
+            <button class="next-btn" onclick="go(3)">Aur b suno ya bas? 😉</button>
         </div>
     </div>
 
@@ -207,7 +255,7 @@ h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold)
             <div class="gift-box" onclick="revealGift(this)">🎁</div>
             <div id="giftMsg" style="display:none; margin-top:20px;">
                 <h2 style="color:var(--gold)">Main tumhain infinite love,caring,respect,frendship dy sakta hon (qabool karo g mera toohfa?) ❤️</h2>
-                <p>Mera gift ye hai ke main hamesha tumhara saath doon. Bara rare ha ya gift 😄</p>
+                <p>Mera gift ye hai ke main hamesha tumhara saath doon ga. Bara rare ha ya gift 😄</p>
                 <button class="next-btn" onclick="go(10)">Ab Voice b sun lo ➔</button>
             </div>
         </div>
@@ -219,7 +267,7 @@ h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold)
             <p>Yrr tuny kha tha na gany ka la ab sun lyy.Lakin khabardar ager hassi to main kutt laga deni.Ager acha na lagy to band kardii😄😄</p>
             <div class="voice-box">
                 <audio id="myVoice" controls style="width: 100%; filter: invert(1);">
-                    <source src="song4.mp3" type="audio/mpeg">
+                    <source src="song1.mp3" type="audio/mpeg">
                     
                 </audio>
             </div>
@@ -320,8 +368,18 @@ function celebrate() {
         setTimeout(() => d.remove(), 4000);
     }
 }
+function startExperience() {
+    // This triggers your music automatically
+    autoStartMusic(); 
+    
+    // This adds the CSS class to slide the curtain away
+    const curtain = document.getElementById('opening-curtain');
+    curtain.classList.add('curtain-off');
+    
+    // Optional: Start your celebration flowers immediately on open
+    celebrate(); 
+}
 </script>
 
 </body>
 </html>
-
