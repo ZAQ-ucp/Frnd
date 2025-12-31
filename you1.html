@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Sehar Fatima 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary: #ff477e;
+    --gold: #d4af37;
+    --black: #121212;
+    --glass-bg: rgba(30, 30, 30, 0.85);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+body { 
+    background: var(--black); 
+    overflow-x: hidden; 
+    color: #eeeeee;
+    cursor: pointer;
+}
+
+#progress {
+    position: fixed; top: 0; left: 0; height: 8px;
+    background: linear-gradient(to right, var(--gold), var(--primary));
+    z-index: 1000; width: 0%; transition: 0.5s;
+}
+
+#canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
+
+.chapter {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    display: none; justify-content: center; align-items: center;
+    padding: 20px; text-align: center;
+}
+
+.chapter.active { display: flex; animation: fadeIn 1s forwards; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    max-width: 600px; width: 95%; /* Mobile responsive width */
+    padding: 30px; border-radius: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    max-height: 90vh; overflow-y: auto; /* Scroll for small screens */
+}
+
+h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--gold); }
+.handwritten { font-family: 'Dancing Script', cursive; font-size: 26px; color: var(--primary); }
+
+.cake-container { font-size: 60px; cursor: pointer; filter: drop-shadow(0 0 10px var(--gold)); }
+.gift-box { font-size: 80px; cursor: pointer; animation: shake 0.5s infinite; filter: drop-shadow(0 0 15px var(--primary)); }
+@keyframes shake { 0%, 100% { transform: rotate(0); } 25% { transform: rotate(5deg); } 75% { transform: rotate(-5deg); } }
+
+.tareef-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+.tareef-card { 
+    background: #252525; 
+    padding: 12px; border-radius: 15px; border: 1px solid #333; 
+    font-size: 13px; color: #ddd; transition: 0.3s;
+}
+
+.next-btn {
+    padding: 10px 30px; background: var(--gold); color: black;
+    border: none; border-radius: 50px; font-weight: 600; cursor: pointer;
+    margin-top: 20px; transition: 0.3s; font-size: 14px;
+}
+
+#musicBtn {
+    position: fixed; bottom: 20px; right: 20px; z-index: 1001;
+    background: #222; border: 2px solid var(--gold); padding: 8px 15px;
+    border-radius: 50px; cursor: pointer; color: var(--gold);
+    font-weight: 600; font-size: 12px; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.voice-box {
+    margin-top: 20px; background: #252525; padding: 15px;
+    border-radius: 20px; border: 1px solid var(--gold);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+    h1 { font-size: 24px; }
+    .handwritten { font-size: 22px; }
+    .tareef-grid { grid-template-columns: 1fr; }
+    .glass-card { padding: 20px; }
+}
+</style>
+</head>
+
+<body onclick="autoStartMusic()">
+
+<div id="progress"></div>
+<canvas id="canvas"></canvas>
+
+<audio id="bgMusic" loop><source src="song1.mp3" type="audio/mpeg"></audio>
+<button id="musicBtn" onclick="toggleMusic(event)">Music: OFF 🎵</button>
+
+<div class="journey">
+    
+    <div class="chapter active" id="ch1">
+        <div class="glass-card">
+            <h1>Happy Birthday meeri jaaaan 🎂</h1>
+            <p class="handwritten">Aaj ka din sirf tere naam...</p>
+            <p style="margin-top: 20px;">Ye bas tery liy special bnai ha main koi gift to ni dy sakta you know why so is per guzara kar i hope you will like it.Yaha use kar rha tha sab kuch color, song  jo main ny tum sy poocha tha.Ya bna rha tha tab 🥰</p>
+            <button class="next-btn" onclick="go(2)">Chal phir Enjoy kar ➔</button>
+        </div>
+    </div>
+
+    <div class="chapter" id="ch2">
+        <div class="glass-card">
+            <h1>Tum mujy ku achi lagti ho ✨</h1>
+            <div class="tareef-grid">
+                <div class="tareef-card">Kuu ky tum ho he khass 😄</div>
+                <div class="tareef-card">Tumhara batain karna kia he khoob ho 💛</div>
+                <div class="tareef-card">Tum burii ni ho bus tum khud ko samajti ho 🤗</div>
+                <div class="tareef-card">Tumhare Jaisa shayad Koi Nahi ha 💎</div>
+            </div>
+            <button class="next-btn" onclick="go(3)">Aur b suno g ya bas? 😉</button>
+        </div>
+    </div>
+
+    <div class="chapter" id="ch3">
+        <div class="glass-card">
+            <h1>Lakin pehly cake kat ty han 🎂</h1>
+            <p>Cake par click kro </p>
+            <div class="cake-container" id="cake" onclick="cutCake()">🎂</div>
+            <h2 id="cakeMsg" style="display:none; color: var(--gold); margin-top:10px;">Kha b ly ab😄 🍰</h2>
+            <button class="next-btn" id="cakeBtn" style="display:none;" onclick="go(4)">Aage Chalo ➔</button>
+        </div>
+    </div>
+
+    <div class="chapter" id="ch4">
+        <div class="glass-card">
+            <h1>Acha tum upset na hoa karo</h1>
+            <p class="handwritten">Ya tera paragraph main ny dobara likh dia ha..ab tu khus hoja</p>
+            <div style="height: 180px; overflow-y: auto; margin: 20px 0; padding-right: 10px; text-align: left; font-size: 14px; line-height: 1.6; border-right: 1px solid #333;">
+                <p style="font-style: italic;">"Ab phir na kehna chatgpt ha khud likh rha hon 
+                Tum waqiy main achi hon bas khud ko underestimate karti ho😄.Mujy to tum jasy ho wasy he achi lagti ho pta ni log
+                to ha pagal chor logon ka.My bestie you are kind by the way.Bas dua ha kind bnda mily tujy warna main ny us ko qatal kar dena
+                .Tum tention na lo tumhain achy waala aur teri type wala mily ga 😄.Baki jahan tak BMW ki baat ha wo ham ly lyn Gy Inshallah
+                .Tum meri guider ho bestie ho bagoo ho ..soni swanni hoo.Bas mood kharab ho to bta diya karoo.Han bnda aty he chor na jana 😄..Wasy muj per barosa rako main ni choro ga 
+                bandi any per b 😄..Mujy pata tum b ni choro gi ..Baaki Allah teri qismat achi kary .Tumhain ghar main pakry jany sy bachai Allah 😄😄.
+                Tum wasy he pyari ho tumhain mil jay ga mera sooch..😄 "</p>
+            </div>
+            <button class="next-btn" onclick="go(5)">Chal bas agy chal 💕</button>
+        </div>
+    </div>
+
+    <div class="chapter" id="ch5">
+        <div class="glass-card">
+            <h1>Kuch Aur Baatein bataon... 🌷</h1>
+            <div class="tareef-grid">
+                <div class="tareef-card">Tum caring ho wasy 🧠</div>
+                <div class="tareef-card">Kind to ho he ✨</div>
+                <div class="tareef-card">Achi Listener be Ho (ku ky meri chawal si batain sunti ho) 🎧</div>
+                <div class="tareef-card">Tum Meri Favoruite list main ho (wasy list main ik hi bnda ha 😄😄😄) 💖</div>
+            </div>
+            <button class="next-btn" onclick="go(6)">Agy chal ziada shookhi na ho😄 ➔</button>
+        </div>
+    </div>
+
+    <div class="chapter" id="ch6">
+        <div class="glass-card">
+            <h1>Tum tareefain sun kar shokii to ni hogii??😄</h1>
+            <p>In per click kar:</p>
+            <div class="tareef-grid">
+                <div class="tareef-card" onclick="this.innerHTML='You are my best friend'">🪴</div>
+                <div class="tareef-card" onclick="this.innerHTML='You are my best friend'">🪴</div>
+                <div class="tareef-card" onclick="this.innerHTML='You are my best friend '">🪴</div>
+                <div class="tareef-card" onclick="this.innerHTML='Bas bas aur kitni bar kahoon 😄'">🪴</div>
+            </div>
+            <button class="next-btn" onclick="go(7)">Chapter 7 Pe Chalo</button>
+        </div>
+    </div>
+
+    <div class="chapter" id="ch7">
+        <div class="glass-card">
+            <h1>Mera Wada 🤝</h1>
+            <p>Chahe jo bhi ho jaye, tum hamesha mere liye special rahogi. Tumhari dosti mere liye ek tohfa hai jisy main sambal ky rakoon ga.</p>
+            <p class="handwritten" style="font-size: 24px;">Hamesha aise hi rehna!</p>
+            <button class="next-btn" onclick="go(8)">Bas karo ab thak gai hogii?</button>
+        </div>
+    </div>
+
+    <div class="chapter" id="ch8">
+        <div class="glass-card">
+            <h1>Gift ly lo phir</h1>
+            <p>Aankhein band karo (khair tuny ankhy band ku ni kii??) </p>
+            <div style="font-size: 60px; margin: 20px;">🙏✨💫</div>
+            <button class="next-btn" onclick="go(9)">Gift Open Karo! 🎁</button>
+        </div>
+    </div>
+
+    <div class="chapter" id="ch9">
+        <div class="glass-card">
+            <h1>Ya lo gift 🎁</h1>
+            <div class="gift-box" onclick="revealGift(this)">🎁</div>
+            <div id="giftMsg" style="display:none; margin-top:20px;">
+                <h2 style="color:var(--gold)">Main tumhain infinite love,caring,respect,frendship dy sakta hon (qabool karo g mera toohfa?) ❤️</h2>
+                <p>Mera gift ye hai ke main hamesha tumhara saath doon. Bara rare ha ya gift 😄</p>
+                <button class="next-btn" onclick="go(10)">Ab Voice b sun lo ➔</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="chapter" id="ch10">
+        <div class="glass-card">
+            <h1>Song by</h1>
+            <p>Yrr tuny kha tha na gany ka la ab sun lyy.Lakin khabardar ager hassi to main kutt laga deni.Ager acha na lagy to band kardii😄😄</p>
+            <div class="voice-box">
+                <audio id="myVoice" controls style="width: 100%; filter: invert(1);">
+                    <source src="song2.mp3" type="audio/mpeg">
+                    
+                </audio>
+            </div>
+            <button class="next-btn" onclick="go(11)">Chal agyy ab</button>
+        </div>
+    </div>
+
+    <div class="chapter" id="ch11">
+        <div class="glass-card">
+            <h1 style="font-size: 35px;">Happy Birthday, Sehar! 🎊</h1>
+            <p class="handwritten">Meri Cutie Pie, Meri Janu 💖</p>
+            <p style="margin-top: 20px;">Wasy ager tumhain ya pasand ni aya over laga ya kuch b to bta dena main delete kardon ga 😄 ...ni ni main physical gift don ga lakin tumhari razzamandi par. I hope tumhara ye saal tumhari hasi ki tarah khoobsurat ho. Tumhain dukh na hoon. Tum bilkul kush raho.</p>
+            <p><strong>- Hamesha Tumhara, Zaq (By the way mera nickname ZAQ ha..sorry pehly ni bataya guusa na hona)</strong></p>
+            <button class="next-btn" onclick="celebrate()">Click kar main tum par phool phankoon ga 😄😄 🎆</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+const music = document.getElementById('bgMusic');
+const mBtn = document.getElementById('musicBtn');
+const myVoice = document.getElementById('myVoice');
+let musicStarted = false;
+
+// Voice play ho to background music halka ho jaye
+if(myVoice) {
+    myVoice.onplay = () => { music.volume = 0.2; };
+    myVoice.onpause = () => { music.volume = 1.0; };
+}
+
+function autoStartMusic() {
+    if (!musicStarted) {
+        music.play();
+        musicStarted = true;
+        mBtn.innerHTML = "Music: ON ⏸️";
+    }
+}
+
+function toggleMusic(e) {
+    e.stopPropagation();
+    if (music.paused) {
+        music.play();
+        mBtn.innerHTML = "Music: ON ⏸️";
+    } else {
+        music.pause();
+        mBtn.innerHTML = "Music: OFF ▶️";
+    }
+}
+
+function go(n) {
+    document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
+    document.getElementById('ch'+n).classList.add('active');
+    document.getElementById('progress').style.width = (n * 9.09) + "%";
+}
+
+function cutCake() {
+    const cake = document.getElementById('cake');
+    cake.innerHTML = "🍰🍴";
+    document.getElementById('cakeMsg').style.display = 'block';
+    document.getElementById('cakeBtn').style.display = 'inline-block';
+    celebrate();
+}
+
+function revealGift(el) {
+    el.style.display = 'none';
+    document.getElementById('giftMsg').style.display = 'block';
+    celebrate();
+}
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+let particles = [];
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.color = Math.random() > 0.5 ? `rgba(212, 175, 55, 0.3)` : `rgba(255, 71, 126, 0.3)`;
+    }
+    draw() { ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
+}
+for(let i=0; i<80; i++) particles.push(new Particle());
+function animate() {
+    ctx.clearRect(0,0,canvas.width, canvas.height);
+    particles.forEach(p => p.draw());
+    requestAnimationFrame(animate);
+}
+animate();
+
+function celebrate() {
+    for(let i=0; i<100; i++) {
+        const d = document.createElement('div');
+        d.style.cssText = `position:fixed; left:${Math.random()*100}vw; top:100%; width:10px; height:10px; background:hsl(${Math.random()*360},70%,50%); border-radius:50%; z-index:2000;`;
+        document.body.appendChild(d);
+        d.animate([{ transform: 'translateY(0)', opacity: 1 }, { transform: `translate(${(Math.random()-0.5)*500}px, -110vh)`, opacity: 0 }], { duration: 2000 + Math.random()*2000 });
+        setTimeout(() => d.remove(), 4000);
+    }
+}
+</script>
+
+</body>
+</html>
